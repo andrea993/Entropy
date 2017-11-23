@@ -12,7 +12,7 @@ This tool anlyze binary file to find:
 
 The purpose of the tool is to discover if a file is randomic, compressed, compressibile and to estimate the amount of included information.
 
-This tool can be usefull in reverse engineering, data analysis and information theory.
+This tool can be useful in reverse engineering, data analysis and information theory.
 
 ## How to read output?
 Entropy says how many bit/sample can be use at least to describe the file, so if it's near 8bit/sample the file is not compressibile and can be a randomic noise or a compressed file.
