@@ -23,7 +23,10 @@ inline double diffsat(double a, double b)
 int main(int argc, char** argv)
 {
 	if (argc != 2)
-		throw logic_error("A filename is required");
+	{
+		cout<<"Usage:"<<endl<<"entropy [filename]" <<endl;
+		return -1;
+	}
 
 	ifstream file(argv[1]);
 
@@ -33,9 +36,8 @@ int main(int argc, char** argv)
 	unsigned char c;
 	vector<double> f(256,0);
 
-	unsigned tot=0;
-	double sum=0;
-	double sum2=0;
+	double tot=0;
+	double sum=0, sum2=0;
 
 	while (file >> c)
 	{
@@ -48,7 +50,7 @@ int main(int argc, char** argv)
 	file.close();
 
 	double mean=sum/tot;
-	double var=(sum2/tot - mean*mean)*tot/(tot-1.0);
+	double var=(sum2 - sum*sum/tot)/(tot-1.0);
 	double sigma=sqrt(var);
 
 	double entropy=0.0;
@@ -58,7 +60,7 @@ int main(int argc, char** argv)
 
 	for (unsigned i=0; i<f.size(); i++)
 	{
-		f[i]/=static_cast<double>(tot);
+		f[i]/=tot;
 
 		entropy -= f[i]*log2(f[i]);
 
